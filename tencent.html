@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>腾讯-易车 - AI 数字人直播 | 李秀慧</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff8a65', // 科技橙
+                        secondary: '#64748b', // 蓝灰
+                        dark: '#0f172a',
+                        darker: '#020617',
+                        card: '#1e293b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        hand: ['Patrick Hand', 'cursive'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 1, boxShadow: '0 0 15px rgba(255,138,101,0.5)' },
+                            '50%': { opacity: .7, boxShadow: '0 0 5px rgba(255,138,101,0.2)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-darker text-slate-200 font-sans antialiased overflow-x-hidden selection:bg-primary/30 selection:text-white">
+
+    <!-- Ambient Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[#ff8a65]/5 to-transparent"></div>
+        <div class="absolute top-1/4 right-10 w-96 h-96 bg-[#64748b] rounded-full mix-blend-screen filter blur-[120px] opacity-[0.08] animate-blob"></div>
+        <div class="absolute bottom-10 left-1/4 w-[500px] h-[500px] bg-[#ff8a65] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] animate-blob animation-delay-4000"></div>
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass top-0 transition-all duration-300 border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <a href="index.html#experience" class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2">
+                        <i class="fas fa-arrow-left"></i> <span>返回主页</span>
+                    </a>
+                </div>
+                <div class="text-sm font-medium text-gray-300 flex items-center gap-2">
+                    <i class="fab fa-tencent-weibo text-white"></i> 腾讯-易车项目复盘
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-24 pb-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="text-center mb-10" data-aos="fade-down">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-darker border border-primary/30 text-primary text-xs font-mono mb-4 shadow-[0_0_15px_rgba(255,138,101,0.15)]">
+                <i class="fas fa-video"></i> AI 数字人直播服务
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">腾讯-易车 <br/> <span class="gradient-text">数字人直播客服</span></h1>
+            <p class="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                针对汽车电商经销商 24 小时直播人力成本高的问题，打造 AI 数字人直播服务，负责直播稿生成与问答体系搭建，有效降低成本并提升直播转化率。
+            </p>
+        </div>
+
+        <!-- Section 1: Business Goals & Responsibilities (Bento Box) -->
+        <div class="mb-14" data-aos="fade-up">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <i class="fas fa-layer-group text-primary"></i> 核心策略与落地
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <!-- Core Objective -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col group hover:border-primary/30 md:col-span-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary group-hover:text-primary transition-colors text-sm">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">核心目标</h3>
+                    </div>
+                    <div class="flex flex-col gap-4 flex-1 justify-center">
+                        <p class="text-sm text-gray-300 leading-relaxed border-l-2 border-primary/50 pl-3">
+                            提升 AI 客服模型准召率，进而带动直播间留资转化。
+                        </p>
+                        <div class="bg-darker/50 p-4 rounded-xl border border-gray-700/50 shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+                            <p class="text-xs text-gray-400 mb-3">北极星指标：</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20">模型准召率</span>
+                                <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs font-bold rounded-full border border-secondary/20">留资转化率</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsibilities (Bento Style) -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col group hover:border-primary/30 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary group-hover:text-primary transition-colors text-sm">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">核心执行模块</h3>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 flex-1">
+                        <div class="flex gap-3 items-start hover:bg-white/5 p-2 rounded-lg transition-colors">
+                            <div class="mt-1 bg-darker p-2 rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] text-primary text-xs">
+                                01
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-200">意图分类体系建设</h4>
+                                <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">梳理直播间高频场景，搭建一级/二级意图体系，撰写识别 Prompt，并与算法联动迭代。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start hover:bg-white/5 p-2 rounded-lg transition-colors">
+                            <div class="mt-1 bg-darker p-2 rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] text-primary text-xs">
+                                02
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-200">回复策略标准化</h4>
+                                <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">统一「信息点-约束口径-引导动作」回复结构，支持多轮追问补全，提升对话可控性。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start hover:bg-white/5 p-2 rounded-lg transition-colors">
+                            <div class="mt-1 bg-darker p-2 rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] text-primary text-xs">
+                                03
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-200">风控与合规策略</h4>
+                                <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">词库分级治理，调整 Prompt 降低违规。建立“实测-反馈-修正”闭环，进行多轮 AB 测试。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start hover:bg-white/5 p-2 rounded-lg transition-colors">
+                            <div class="mt-1 bg-darker p-2 rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] text-primary text-xs">
+                                04
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-200">客诉与 Badcase 闭环</h4>
+                                <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">调研客户需求，沉淀高优 Badcase 清单推动修复，输出策略优化建议。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section 2: Visual Showcase -->
+        <div class="mb-14" data-aos="fade-up">
+            <h2 class="text-xl font-bold text-white mb-8 flex items-center gap-2">
+                <i class="fas fa-photo-video text-primary"></i> 策略与方案展示
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Image 1: 意图分类体系 -->
+                <div class="relative group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-primary rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-700"></div>
+                    <div class="relative glass-card p-4 rounded-2xl flex flex-col h-full">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fas fa-sitemap text-primary"></i>
+                            <h3 class="text-sm font-bold text-white">AI 客服意图分类体系</h3>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-gray-700/50 bg-darker flex-1 flex items-center justify-center relative">
+                            <img src="意图分类体系.jpg" alt="意图分类体系" class="w-full h-auto max-h-[300px] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" onerror="this.src='https://via.placeholder.com/600x400/1e293b/ff8a65?text=Image+Missing'">
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-darker/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none flex items-center justify-center">
+                                <div class="px-4 py-2 bg-darker/80 backdrop-blur-sm rounded-full text-white text-sm font-medium border border-white/10 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    <i class="fas fa-search-plus"></i> 点击查看大图
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4 leading-relaxed">构建一、二、三级意图标签，全面覆盖汽车直播间问答场景。</p>
+                    </div>
+                </div>
+
+                <!-- Image 2: 直播稿结构 -->
+                <div class="relative group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-secondary via-primary to-secondary rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-700"></div>
+                    <div class="relative glass-card p-4 rounded-2xl flex flex-col h-full">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fas fa-file-alt text-secondary"></i>
+                            <h3 class="text-sm font-bold text-white">AI 直播稿件框架</h3>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-gray-700/50 bg-darker flex-1 flex items-center justify-center relative">
+                            <img src="直播搞结构.jpg" alt="直播稿结构" class="w-full h-auto max-h-[300px] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" onerror="this.src='https://via.placeholder.com/600x200/1e293b/64748b?text=Image+Missing'">
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-darker/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none flex items-center justify-center">
+                                <div class="px-4 py-2 bg-darker/80 backdrop-blur-sm rounded-full text-white text-sm font-medium border border-white/10 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    <i class="fas fa-search-plus"></i> 点击查看大图
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4">标准化「信息点-约束口径-引导动作」结构，模型段落直接匹配。</p>
+                    </div>
+                </div>
+
+                <!-- Image 3: 敏感词策略 -->
+                <div class="relative group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-red-500/50 via-primary/50 to-red-500/50 rounded-2xl blur opacity-20 group-hover:opacity-50 transition duration-700"></div>
+                    <div class="relative glass-card p-4 rounded-2xl flex flex-col h-full">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fas fa-shield-alt text-red-400"></i>
+                            <h3 class="text-sm font-bold text-white">风控与敏感词策略</h3>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-gray-700/50 bg-darker flex-1 flex items-center justify-center relative">
+                            <img src="直播间敏感词策略.jpg" alt="敏感词策略" class="w-full h-auto max-h-[300px] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" onerror="this.src='https://via.placeholder.com/600x200/1e293b/ef4444?text=Image+Missing'">
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-darker/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none flex items-center justify-center">
+                                <div class="px-4 py-2 bg-darker/80 backdrop-blur-sm rounded-full text-white text-sm font-medium border border-white/10 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    <i class="fas fa-search-plus"></i> 点击查看大图
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4">词库分级治理，有效降低直播间封禁与违规触发概率。</p>
+                    </div>
+                </div>
+                
+                <!-- Empty State Placeholder (for layout balance) -->
+                <div class="relative group hidden md:block">
+                    <div class="relative glass-card p-4 rounded-2xl flex flex-col h-full border-dashed border-gray-700/50 bg-transparent opacity-50">
+                         <div class="flex-1 flex flex-col items-center justify-center text-gray-600 gap-3">
+                            <i class="fas fa-chart-pie text-2xl"></i>
+                            <span class="text-xs font-mono">Continuous Optimization...</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Business Results -->
+        <div class="mt-16" data-aos="fade-up">
+            <h3 class="text-xl font-bold text-white mb-8 flex items-center justify-center gap-3">
+                <i class="fas fa-trophy text-primary"></i> 核心业务成果
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- Metric 1 -->
+                <div class="glass-card p-5 rounded-2xl flex flex-col items-center justify-center text-center group hover:border-primary/50 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-all"></div>
+                    <i class="fas fa-chart-line text-2xl text-primary mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-2xl font-bold text-white mb-1">+8%</h4>
+                    <p class="text-xs text-gray-400">直播间留资转化率</p>
+                </div>
+                
+                <!-- Metric 2 -->
+                <div class="glass-card p-5 rounded-2xl flex flex-col items-center justify-center text-center group hover:border-secondary/50 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-secondary/10 rounded-full blur-xl group-hover:bg-secondary/20 transition-all"></div>
+                    <i class="fas fa-crosshairs text-2xl text-secondary mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-2xl font-bold text-white mb-1">89 / 93</h4>
+                    <p class="text-xs text-gray-400">意图识别准 / 召率</p>
+                </div>
+
+                <!-- Metric 3 -->
+                <div class="glass-card p-5 rounded-2xl flex flex-col items-center justify-center text-center group hover:border-primary/50 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-all"></div>
+                    <i class="fas fa-compress-arrows-alt text-2xl text-primary mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-2xl font-bold text-white mb-1">90%+</h4>
+                    <p class="text-xs text-gray-400">直播问题场景覆盖率</p>
+                </div>
+
+                <!-- Metric 4 -->
+                <div class="glass-card p-5 rounded-2xl flex flex-col items-center justify-center text-center group hover:border-red-500/50 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-red-500/10 rounded-full blur-xl group-hover:bg-red-500/20 transition-all"></div>
+                    <i class="fas fa-shield-alt text-2xl text-red-400 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-2xl font-bold text-white mb-1">-10%</h4>
+                    <p class="text-xs text-gray-400">风控违规率</p>
+                </div>
+
+            </div>
+            <!-- Extra Metric -->
+            <div class="mt-4 text-center">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-darker border border-gray-700 rounded-full text-xs text-gray-400 shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+                    <i class="fas fa-headset text-secondary"></i> 客诉率同步下降 6%
+                </span>
+            </div>
+        </div>
+        
+        <!-- Back Button -->
+        <div class="text-center mt-16" data-aos="fade-in">
+            <a href="index.html#experience" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-darker border border-gray-700 text-gray-300 hover:text-white hover:border-primary transition-all shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] text-sm">
+                <i class="fas fa-home"></i> 返回简历主页
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center">
+            <button class="absolute top-4 right-4 text-white/50 hover:text-white bg-darker/50 hover:bg-darker w-10 h-10 rounded-full flex items-center justify-center transition-all z-10" onclick="closeLightbox()">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300" onclick="event.stopPropagation()">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-cubic'
+        });
+
+        // Navbar blur on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-slate-900/90', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-slate-900/90', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.remove('opacity-0', 'pointer-events-none');
+            lightbox.classList.add('opacity-100', 'pointer-events-auto');
+            setTimeout(() => {
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('opacity-100', 'pointer-events-auto');
+            lightbox.classList.add('opacity-0', 'pointer-events-none');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightboxImg.src = '';
+            }, 300); // Wait for transition
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+        
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !lightbox.classList.contains('opacity-0')) {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

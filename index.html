@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李秀慧 | AI Product Manager Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff8a65', // 科技橙 (Copper Orange)
+                        secondary: '#64748b', // 蓝灰色 (Blue Gray)
+                        accent: '#94a3b8', // 浅蓝灰 (Light Blue Gray)
+                        dark: '#0f172a', // 深蓝灰背景 (Slate 900)
+                        darker: '#020617', // 极黑偏蓝灰 (Slate 950)
+                        card: '#1e293b', // 卡片底色 (Slate 800)
+                        glass: 'rgba(15, 23, 42, 0.7)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        hand: ['Patrick Hand', 'cursive'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'typing': 'typing 3.5s steps(40, end), blink-caret .75s step-end infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        typing: {
+                            from: { width: '0' },
+                            to: { width: '100%' }
+                        },
+                        'blink-caret': {
+                            'from, to': { borderColor: 'transparent' },
+                            '50%': { borderColor: '#ff8a65' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .handwritten {
+            font-family: 'Patrick Hand', cursive;
+        }
+        .glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            box-shadow: 
+                inset 1px 1px 0px rgba(255, 255, 255, 0.05),
+                inset -1px -1px 0px rgba(0, 0, 0, 0.5),
+                0 20px 40px -10px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(255, 138, 101, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0); /* Force GPU acceleration */
+            will-change: transform, box-shadow;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            padding: 1px; /* 边框宽度 */
+            background: linear-gradient(135deg, rgba(255, 138, 101, 0.5) 0%, rgba(100, 116, 139, 0.5) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                inset 1px 1px 0px rgba(255, 255, 255, 0.1),
+                inset -1px -1px 0px rgba(0, 0, 0, 0.5),
+                0 25px 50px -12px rgba(0, 0, 0, 0.9),
+                0 0 0 1px rgba(255, 138, 101, 0.2),
+                -20px -20px 60px -20px rgba(255, 138, 101, 0.15);
+            z-index: 20;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #ff8a65 0%, #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #ff8a65 0%, #64748b 100%);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #64748b, #ff8a65);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff7043;
+        }
+        
+        .typing-container {
+            display: inline-block;
+            overflow: hidden;
+            border-right: .15em solid #ff8a65;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .10em;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        /* Sticker Effect */
+        .sticker {
+            transform: rotate(-3deg);
+            box-shadow: 2px 3px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .sticker:hover {
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        /* Blob Animation */
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass top-0 transition-all duration-300 border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-2" data-aos="fade-right">
+                    <span class="text-xl md:text-2xl font-bold gradient-text tracking-tighter">Li Xiuhui</span>
+                    <span class="hidden sm:inline-block text-xs text-gray-400 border border-gray-700 px-2 py-0.5 rounded ml-2">PM portfolio</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8" data-aos="fade-down" data-aos-delay="100">
+                        <a href="#home" class="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors relative group">
+                            首页
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#about" class="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors relative group">
+                            关于我
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#experience" class="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors relative group">
+                            实习经历
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#portfolio" class="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors relative group">
+                            作品展示
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#skills" class="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors relative group">
+                            技能栈
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:block" data-aos="fade-left">
+                    <a href="#contact" class="px-5 py-2 rounded-full gradient-bg text-white text-sm font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 transform hover:-translate-y-0.5">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <!-- Ambient Background -->
+        <div class="absolute inset-0 z-0">
+            <!-- Copper Blob -->
+            <div class="absolute top-20 left-10 w-96 h-96 bg-[#ff8a65] rounded-full mix-blend-screen filter blur-[100px] opacity-[0.08] animate-pulse-slow"></div>
+            <!-- Blue Gray Blob -->
+            <div class="absolute top-40 right-10 w-96 h-96 bg-[#64748b] rounded-full mix-blend-screen filter blur-[100px] opacity-[0.12] animate-pulse-slow" style="animation-delay: 2s;"></div>
+            <!-- Copper Blob 3 -->
+            <div class="absolute -bottom-8 left-1/2 w-96 h-96 bg-[#ff8a65] rounded-full mix-blend-screen filter blur-[100px] opacity-[0.08] animate-pulse-slow" style="animation-delay: 4s;"></div>
+            <!-- Sparkles/Stars (CSS generated) -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjE1KSIvPgo8L3N2Zz4=')] opacity-40"></div>
+            <!-- Grid Pattern -->
+            <div class="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05]" style="background-size: 30px 30px; mask-image: linear-gradient(to bottom, transparent, 5%, white, 95%, transparent);"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row items-center gap-12">
+            <div class="w-full md:w-1/2 text-center md:text-left pt-8 md:pt-0" data-aos="fade-right" data-aos-duration="1000">
+                <!-- Handwritten Tag -->
+                <div class="relative inline-block mb-6 group cursor-pointer">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-500 animate-pulse-slow"></div>
+                    <div class="relative px-4 py-2 bg-dark/80 backdrop-blur-sm ring-1 ring-white/10 rounded-lg leading-none flex items-center">
+                        <span class="flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(255,138,101,0.8)]"></span>
+                            <span class="text-gray-200 text-sm handwritten text-lg drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">AIGC PM - 2026 Grad</span>
+                        </span>
+                    </div>
+                    <!-- Handwritten arrow -->
+                    <div class="absolute -right-24 -top-8 hidden md:block opacity-80 rotate-12 animate-float-delayed">
+                         <span class="handwritten text-primary text-xl drop-shadow-[0_0_5px_rgba(255,138,101,0.5)]">Ready to work! 🚀</span>
+                         <svg class="w-8 h-8 text-primary transform rotate-90 ml-2 filter drop-shadow-[0_0_5px_rgba(255,138,101,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    </div>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                    Hi, I'm <span class="gradient-text animate-pulse-slow inline-block drop-shadow-[0_0_15px_rgba(255,138,101,0.4)]">李秀慧</span>
+                    <br>
+                    <span class="text-3xl md:text-5xl text-gray-200 font-normal mt-4 block drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">AI Product Manager</span>
+                </h1>
+                
+                <div class="mb-8 max-w-2xl">
+                    <div class="flex flex-col gap-3 mb-4 text-sm md:text-base font-mono text-gray-300">
+                        <span class="inline-flex items-center px-4 py-1.5 bg-darker/50 backdrop-blur-sm border border-primary/30 rounded-full w-fit hover:scale-105 hover:border-primary/60 hover:text-primary transition-all cursor-default shadow-[0_0_15px_rgba(255,138,101,0.1)] hover:shadow-[0_0_20px_rgba(255,138,101,0.3)]">
+                            <i class="fas fa-brain mr-2 text-primary drop-shadow-[0_0_5px_rgba(255,138,101,0.5)]"></i> AI Native Product Cognition
+                        </span>
+                        <span class="inline-flex items-center px-4 py-1.5 bg-darker/50 backdrop-blur-sm border border-secondary/40 rounded-full w-fit hover:scale-105 hover:border-secondary/70 hover:text-secondary transition-all cursor-default shadow-[0_0_15px_rgba(100,116,139,0.1)] hover:shadow-[0_0_20px_rgba(100,116,139,0.3)]">
+                            <i class="fas fa-cogs mr-2 text-secondary drop-shadow-[0_0_5px_rgba(100,116,139,0.5)]"></i> Agent, SFT Implementation
+                        </span>
+                        <span class="inline-flex items-center px-4 py-1.5 bg-darker/50 backdrop-blur-sm border border-primary/30 rounded-full w-fit hover:scale-105 hover:border-primary/60 hover:text-primary transition-all cursor-default shadow-[0_0_15px_rgba(255,138,101,0.1)] hover:shadow-[0_0_20px_rgba(255,138,101,0.3)]">
+                            <i class="fas fa-code mr-2 text-primary drop-shadow-[0_0_5px_rgba(255,138,101,0.5)]"></i> Vibe Coding Ability
+                        </span>
+                    </div>
+                    
+                    <p class="text-base md:text-lg text-gray-300 leading-relaxed font-light border-l-4 border-primary/70 pl-6 mt-6 drop-shadow-[0_0_8px_rgba(255,255,255,0.05)]">
+                        专注 <strong class="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">AI Agent 落地</strong>、<strong class="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">Workflow 设计</strong>与<strong class="text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">大模型评测</strong>。
+                        <span class="block mt-2 text-sm text-gray-400">致力于构建“懂模型、懂业务、懂工程”的复合型 AI 产品能力。</span>
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#experience" class="group relative px-8 py-3 rounded-lg bg-white/5 backdrop-blur-md border border-white/10 text-white font-medium overflow-hidden shadow-[0_0_15px_rgba(255,138,101,0.1)] transition-all hover:border-primary/50 hover:bg-white/10 hover:shadow-[0_0_25px_rgba(255,138,101,0.4)]">
+                        <span class="relative flex items-center gap-2 group-hover:text-primary transition-colors">查看经历 <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i></span>
+                    </a>
+                    <a href="#contact" class="px-8 py-3 rounded-lg bg-darker/40 backdrop-blur-md border border-white/10 hover:border-primary/40 text-gray-300 hover:text-primary font-medium transition-all flex items-center justify-center gap-2 shadow-[0_0_10px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(255,138,101,0.2)]">
+                        联系我
+                    </a>
+                </div>
+                
+                <div class="mt-12 flex items-center justify-center md:justify-start gap-8 text-gray-400">
+                    <div class="flex flex-col items-center gap-1 group cursor-default">
+                        <i class="fas fa-robot text-2xl group-hover:text-primary transition-colors drop-shadow-[0_0_10px_rgba(255,138,101,0)] group-hover:drop-shadow-[0_0_15px_rgba(255,138,101,0.6)]"></i>
+                        <span class="text-xs group-hover:text-white transition-colors">Agent</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 group cursor-default">
+                        <i class="fas fa-sitemap text-2xl group-hover:text-secondary transition-colors drop-shadow-[0_0_10px_rgba(100,116,139,0)] group-hover:drop-shadow-[0_0_15px_rgba(100,116,139,0.6)]"></i>
+                        <span class="text-xs group-hover:text-white transition-colors">Workflow</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 group cursor-default">
+                        <i class="fas fa-terminal text-2xl group-hover:text-primary transition-colors drop-shadow-[0_0_10px_rgba(255,138,101,0)] group-hover:drop-shadow-[0_0_15px_rgba(255,138,101,0.6)]"></i>
+                        <span class="text-xs group-hover:text-white transition-colors">Prompt</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 group cursor-default">
+                        <i class="fas fa-code text-2xl group-hover:text-secondary transition-colors drop-shadow-[0_0_10px_rgba(100,116,139,0)] group-hover:drop-shadow-[0_0_15px_rgba(100,116,139,0.6)]"></i>
+                        <span class="text-xs group-hover:text-white transition-colors">Vibe Coding</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-1/2 flex justify-center relative" data-aos="fade-left" data-aos-duration="1000">
+                <!-- Image Placeholder -->
+                <div class="relative w-72 h-72 md:w-[450px] md:h-[450px] animate-float">
+                    
+                    <!-- Spinning Border -->
+                    <div class="absolute inset-0 rounded-full border border-dashed border-gray-700 animate-spin-slow opacity-30"></div>
+                    <div class="absolute inset-4 rounded-full border border-gray-800 animate-spin-slow opacity-30" style="animation-direction: reverse;"></div>
+
+                    <!-- Main Image Circle -->
+                    <div class="absolute inset-8 rounded-full p-1 bg-gradient-to-tr from-[#ff8a65] via-[#e2b3a3] to-[#d84315] shadow-[0_0_50px_rgba(255,138,101,0.2)]">
+                        <div class="w-full h-full rounded-full bg-darker overflow-hidden relative group">
+                            <img src="李秀慧.jpg" alt="李秀慧" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Badge 1 (Glassmorphism) -->
+                    <div class="absolute top-12 right-0 glass px-4 py-2 rounded-2xl border border-white/10 shadow-[0_0_25px_rgba(100,116,139,0.3)] flex items-center gap-3 animate-float-delayed z-20 backdrop-blur-md">
+                        <div class="w-10 h-10 rounded-full bg-secondary/30 flex items-center justify-center border border-secondary/40 shadow-[inset_0_0_10px_rgba(255,255,255,0.2)]">
+                            <i class="fas fa-magic text-secondary drop-shadow-[0_0_5px_rgba(100,116,139,0.8)]"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-300">AI</p>
+                            <p class="text-sm font-bold text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">Product Manager</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Badge 2 (Glassmorphism + Glow) -->
+                    <div class="absolute bottom-16 -left-6 glass px-4 py-2 rounded-2xl border border-white/10 shadow-[0_0_25px_rgba(255,138,101,0.3)] flex items-center gap-3 animate-float z-20 backdrop-blur-md">
+                        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/40 shadow-[inset_0_0_10px_rgba(255,255,255,0.2)]">
+                            <i class="fas fa-code text-primary drop-shadow-[0_0_5px_rgba(255,138,101,0.8)]"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-300">Coding Style</p>
+                            <p class="text-sm font-bold text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">Vibe Coding</p>
+                        </div>
+                    </div>
+
+                    <!-- Code snippet decoration -->
+                    <div class="absolute -bottom-4 right-10 glass p-3 rounded-xl border border-primary/30 shadow-[0_0_20px_rgba(255,138,101,0.2)] font-mono text-xs text-primary sticker hidden md:block z-20 backdrop-blur-md">
+                        <div class="typing-container drop-shadow-[0_0_5px_rgba(255,138,101,0.5)]">Hello World! 👋</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Education Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-baseline gap-4 mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold gradient-text">Background</h2>
+                <span class="text-2xl text-gray-500 handwritten">关于我 & 教育背景</span>
+                <div class="h-px flex-1 bg-gradient-to-r from-gray-700 to-transparent ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Education Timeline -->
+                <div class="lg:col-span-5 flex flex-col justify-center">
+                    <div class="relative border-l border-gray-700 ml-4 md:ml-6 space-y-12">
+                        <!-- Edu 1 -->
+                        <div class="relative pl-8 md:pl-10 group" data-aos="fade-up" data-aos-delay="100">
+                            <!-- Timeline dot -->
+                            <div class="absolute w-4 h-4 bg-darker border-2 border-primary rounded-full -left-[8px] top-1.5 group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(255,138,101,0.6)] transition-all duration-300"></div>
+                            <!-- Timeline line highlight -->
+                            <div class="absolute w-[1px] h-0 bg-gradient-to-b from-primary to-transparent -left-[0.5px] top-1.5 group-hover:h-full transition-all duration-700"></div>
+                            
+                            <div class="glass-card p-6 rounded-2xl">
+                                <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+                                    <h3 class="text-xl font-bold text-white">贵州财经大学</h3>
+                                    <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20">2023 - 2026</span>
+                                </div>
+                                <p class="text-gray-400 mb-4 font-medium text-sm">国际商务 (硕士)</p>
+                                <ul class="text-sm text-gray-300 space-y-2 list-disc list-outside ml-4">
+                                    <li>连续三年获奖学金。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Edu 2 -->
+                        <div class="relative pl-8 md:pl-10 group" data-aos="fade-up" data-aos-delay="200">
+                            <div class="absolute w-4 h-4 bg-darker border-2 border-gray-500 rounded-full -left-[8px] top-1.5 group-hover:border-primary group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(255,138,101,0.6)] transition-all duration-300"></div>
+                            
+                            <div class="glass-card p-6 rounded-2xl">
+                                <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+                                    <h3 class="text-xl font-bold text-white">潍坊科技学院</h3>
+                                    <span class="px-3 py-1 bg-darker text-gray-400 text-xs font-bold rounded-full border border-gray-700">2019 - 2023</span>
+                                </div>
+                                <p class="text-gray-400 mb-4 font-medium text-sm">国际商务 (本科)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Competencies Bento Box -->
+                <div class="lg:col-span-7">
+                    <div class="glass-card p-8 md:p-10 rounded-3xl h-full flex flex-col" data-aos="fade-left">
+                        <div class="flex justify-between items-center mb-8 border-b border-gray-700/50 pb-4">
+                            <h3 class="text-2xl font-bold text-white flex items-center gap-3">
+                                <i class="fas fa-fire text-orange-500"></i> 核心竞争力
+                            </h3>
+                            <span class="handwritten text-gray-400 text-lg rotate-3">Keep Learning! 🌱</span>
+                        </div>
+
+                        <div class="space-y-6 flex-1 flex flex-col justify-center">
+                            <!-- Comp 1 -->
+                            <div class="group flex gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors cursor-default">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary border border-primary/30 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(255,138,101,0.2)]">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white mb-2">产品基础扎实</h4>
+                                    <p class="text-sm text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+                                        具备撰写 PRD、原型图设计、竞品调研、数据分析等过硬的基础产品能力。
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Comp 2 -->
+                            <div class="group flex gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors cursor-default">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary border border-secondary/30 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(100,116,139,0.2)]">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white mb-2">AI 模型应用实战</h4>
+                                    <p class="text-sm text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+                                        拥有丰富的 AI 模型应用侧实习经验，可独立搭建评测标准 Policy、评测集。
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Comp 3 -->
+                            <div class="group flex gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors cursor-default">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary border border-primary/30 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(255,138,101,0.2)]">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white mb-2">工程化能力</h4>
+                                    <p class="text-sm text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+                                        在 Prompt 设计、Agent workflow 构建、模型微调经验方面有深厚积累，均可直接复用于新业务场景。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 relative bg-darker border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-baseline gap-4 mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold gradient-text">Experience</h2>
+                <span class="text-2xl text-gray-500 handwritten">大厂实习经历</span>
+                <div class="h-px flex-1 bg-gradient-to-r from-gray-700 to-transparent ml-4"></div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-4 lg:gap-8">
+                <!-- Timeline Axis (Reference Style) -->
+                <div class="hidden lg:flex flex-col items-center w-8 pt-4 opacity-70">
+                    <div class="w-px h-24 bg-gradient-to-b from-transparent to-gray-600"></div>
+                    <div class="flex flex-col gap-6 py-6">
+                        <div class="w-3 h-3 rounded-full border-2 border-primary bg-darker shadow-[0_0_10px_rgba(255,138,101,0.5)]"></div>
+                        <div class="w-3 h-3 rounded-full border-2 border-gray-500 bg-darker"></div>
+                        <div class="w-3 h-3 rounded-full border-2 border-gray-500 bg-darker"></div>
+                    </div>
+                    <div class="w-px flex-1 bg-gradient-to-b from-gray-600 to-transparent"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-1">
+                    <!-- 字节跳动 (Text Top, Image Bottom) -->
+                    <div class="glass-card rounded-2xl p-6 flex flex-col group hover:border-primary/50 cursor-pointer relative" data-aos="fade-up" data-aos-delay="100" onclick="window.location.href='bytedance.html'">
+                        <!-- View Details Hover Overlay -->
+                        <div class="absolute inset-0 bg-darker/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-30 rounded-2xl">
+                            <span class="px-6 py-2 bg-primary/20 text-primary rounded-full font-bold shadow-[0_0_15px_rgba(255,138,101,0.5)] border border-primary/50 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                <i class="fas fa-external-link-alt"></i> 查看完整复盘
+                            </span>
+                        </div>
+
+                        <!-- Text Part -->
+                        <div class="flex flex-col mb-6 relative z-20">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-white border border-gray-700 flex items-center justify-center shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] overflow-hidden">
+                                    <img src="bytedance-icon.jpg" alt="ByteDance Logo" class="w-8 h-8 object-contain group-hover:scale-110 transition-transform">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">字节跳动</h3>
+                                    <p class="text-xs text-gray-400">AI 产品经理</p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-mono text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20 w-fit mb-3">2025.12 - 至今</span>
+                            <h4 class="text-sm font-bold text-white mb-2">Tiktok Local Service</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                推动生活服务内容判别体系落地、迭代，准确率提升7%，召回率提升6%。
+                            </p>
+                        </div>
+                        
+                        <!-- Image Part -->
+                        <div class="w-full h-40 rounded-xl overflow-hidden relative z-20 mt-auto border border-gray-700/50">
+                            <img src="bytedance-flow.jpg" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80"></div>
+                        </div>
+                    </div>
+
+                    <!-- 滴滴出行 (Image Top, Text Bottom) -->
+                    <div class="glass-card rounded-2xl p-6 flex flex-col group hover:border-primary/50 cursor-pointer relative" data-aos="fade-up" data-aos-delay="200" onclick="window.location.href='didi.html'">
+                        <!-- View Details Hover Overlay -->
+                        <div class="absolute inset-0 bg-darker/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-30 rounded-2xl">
+                            <span class="px-6 py-2 bg-primary/20 text-primary rounded-full font-bold shadow-[0_0_15px_rgba(255,138,101,0.5)] border border-primary/50 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                <i class="fas fa-external-link-alt"></i> 查看完整复盘
+                            </span>
+                        </div>
+
+                        <!-- Image Part -->
+                        <div class="w-full h-40 rounded-xl overflow-hidden relative z-20 mb-6 border border-gray-700/50">
+                            <img src="pet-eval.jpg" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-b from-darker via-transparent to-transparent opacity-80"></div>
+                        </div>
+
+                        <!-- Text Part -->
+                        <div class="flex flex-col relative z-20 mt-auto">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-white border border-gray-700 flex items-center justify-center shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] overflow-hidden">
+                                    <img src="didi-icon.jpg" alt="DiDi Logo" class="w-8 h-8 object-contain group-hover:scale-110 transition-transform">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">滴滴出行</h3>
+                                    <p class="text-xs text-gray-400">AI 产品经理</p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-mono text-[#e2b3a3] bg-[#e2b3a3]/10 px-2 py-1 rounded border border-[#e2b3a3]/20 w-fit mb-3">2025.07 - 2025.11</span>
+                            <h4 class="text-sm font-bold text-white mb-2">货运事业部</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                承接老板专项宠物内容探索，完成 0-1 落地（模版/心情识别+生成 Agent）。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 腾讯-易车 (Text Top, Image Bottom) -->
+                    <div class="glass-card rounded-2xl p-6 flex flex-col group hover:border-primary/50 cursor-pointer relative" data-aos="fade-up" data-aos-delay="300" onclick="window.location.href='tencent.html'">
+                        <!-- View Details Hover Overlay -->
+                        <div class="absolute inset-0 bg-darker/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-30 rounded-2xl">
+                            <span class="px-6 py-2 bg-primary/20 text-primary rounded-full font-bold shadow-[0_0_15px_rgba(255,138,101,0.5)] border border-primary/50 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                <i class="fas fa-external-link-alt"></i> 查看完整复盘
+                            </span>
+                        </div>
+
+                        <!-- Text Part -->
+                        <div class="flex flex-col mb-6 relative z-20">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-white border border-gray-700 flex items-center justify-center shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] overflow-hidden">
+                                    <img src="yiche-icon.jpg" alt="Tencent Logo" class="w-10 h-10 object-contain group-hover:scale-110 transition-transform">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">腾讯-易车</h3>
+                                    <p class="text-xs text-gray-400">AI 电商产品经理</p>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-mono text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20 w-fit mb-3">2025.03 - 2025.07</span>
+                            <h4 class="text-sm font-bold text-white mb-2">AI 数字人直播服务</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed">
+                                打造 AI 数字人直播服务，降低人力成本、提升直播转化率。
+                            </p>
+                        </div>
+                        
+                        <!-- Image Part -->
+                        <div class="w-full h-40 rounded-xl overflow-hidden relative z-20 mt-auto border border-gray-700/50">
+                            <img src="意图分类体系.jpg" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" onerror="this.src='https://via.placeholder.com/600x400/1e293b/ff8a65?text=Image+Missing'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section (Fantasy Style) -->
+    <section id="portfolio" class="py-24 relative border-t border-white/5 overflow-hidden">
+        <!-- Fantasy Ambient Background -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-[#ff8a65] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.08] animate-pulse-slow"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-[#64748b] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.1] animate-pulse-slow" style="animation-delay: 2s;"></div>
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d84315] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] animate-pulse-slow" style="animation-delay: 4s;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row items-baseline gap-4 mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-[#e2b3a3] to-secondary bg-clip-text text-transparent">Portfolio</h2>
+                <span class="text-2xl text-primary/60 handwritten">作品展示</span>
+                <div class="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1: Vibe Coding -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col group hover:border-[#a855f7]/50 cursor-pointer relative border border-primary/20 transition-all duration-500" data-aos="fade-up" data-aos-delay="100" onclick="window.open('https://azzz111.pages.dev', '_blank')">
+                    <!-- Magic Glow on Hover -->
+                    <div class="absolute -inset-1 bg-gradient-to-r from-[#ff8a65] via-[#a855f7] to-[#d84315] rounded-3xl blur opacity-0 group-hover:opacity-30 transition duration-700 animate-pulse-glow"></div>
+                    
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-darker border border-[#a855f7]/30 flex items-center justify-center shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),0_0_15px_rgba(168,85,247,0.2)] group-hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] transition-all duration-300">
+                                <i class="fas fa-hat-wizard text-2xl text-[#a855f7] group-hover:text-white animate-pulse-slow"></i>
+                            </div>
+                            <span class="px-4 py-1.5 bg-[#a855f7]/10 text-[#d8b4fe] text-xs font-bold rounded-full border border-[#a855f7]/20 flex items-center gap-2 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+                                <i class="fas fa-code"></i> Vibe Coding
+                            </span>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-[#d8b4fe] transition-colors">请摘下你的虚拟面具</h3>
+                        <p class="text-sm text-[#d8b4fe]/70 font-mono mb-4 border-l-2 border-[#a855f7]/50 pl-3">职场 MBTI 测试 · 西游记职场宇宙</p>
+                        
+                        <p class="text-sm text-gray-400 leading-relaxed mb-8 flex-1 italic font-serif">
+                            "在格子间里，我们都在扮演着某个完美的NPC。但脱下这层外衣，你的真实底色是什么？这不是那种烂大街的 MBTI，这是一场直击灵魂的 20 个残酷拷问。"
+                        </p>
+                        
+                        <div class="flex justify-between items-center mt-auto border-t border-[#a855f7]/20 pt-4">
+                            <span class="text-xs text-gray-500 font-mono">React / Tailwind / AI</span>
+                            <span class="text-[#d8b4fe] text-sm font-bold group-hover:translate-x-2 transition-transform duration-300">
+                                开始测试 <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: AIGC -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col group hover:border-secondary/50 cursor-pointer relative border border-secondary/20 transition-all duration-500" data-aos="fade-up" data-aos-delay="200" onclick="window.location.href='#'">
+                    <!-- Magic Glow on Hover -->
+                    <div class="absolute -inset-1 bg-gradient-to-r from-secondary via-accent to-[#475569] rounded-3xl blur opacity-0 group-hover:opacity-20 transition duration-700 animate-pulse-glow"></div>
+                    
+                    <div class="relative z-10 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-darker border border-secondary/30 flex items-center justify-center shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),0_0_15px_rgba(100,116,139,0.2)] group-hover:shadow-[0_0_25px_rgba(100,116,139,0.5)] transition-all duration-300">
+                                <i class="fas fa-wand-magic-sparkles text-2xl text-secondary group-hover:text-white animate-pulse-slow"></i>
+                            </div>
+                            <span class="px-4 py-1.5 bg-secondary/10 text-secondary text-xs font-bold rounded-full border border-secondary/20 flex items-center gap-2 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+                                <i class="fas fa-brain"></i> AIGC
+                            </span>
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-secondary transition-colors">AI 影像与内容探索</h3>
+                        <p class="text-sm text-secondary/70 font-mono mb-4 border-l-2 border-secondary/50 pl-3">Prompt Engineering · Agent Workflow</p>
+                        
+                        <p class="text-sm text-gray-400 leading-relaxed mb-8 flex-1 italic font-serif">
+                            "跨模态生成能力的深度探索。结合大模型与定制化 Prompt，搭建从文生图、图生视频到心情识别的全链路 Agent 体系，赋予内容创作更多想象力与控制力。"
+                        </p>
+                        
+                        <div class="flex justify-between items-center mt-auto border-t border-secondary/20 pt-4">
+                            <span class="text-xs text-gray-500 font-mono">Midjourney / Coze / ComfyUI</span>
+                            <span class="text-secondary text-sm font-bold group-hover:translate-x-2 transition-transform duration-300">
+                                敬请期待 <i class="fas fa-arrow-right ml-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative overflow-hidden border-t border-white/5">
+        <!-- Fantasy Ambient Background -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <!-- Magic glowing orbs -->
+            <div class="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#ff8a65]/10 rounded-full mix-blend-screen filter blur-[120px] animate-blob"></div>
+            <div class="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-[#64748b]/20 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-2000"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e2b3a3]/5 rounded-full mix-blend-screen filter blur-[150px] animate-pulse-slow"></div>
+            <!-- Sparkles/Stars (CSS generated) -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+Cjwvc3ZnPg==')] opacity-30"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row items-baseline gap-4 mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-[#e2b3a3] to-secondary bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,138,101,0.2)]">Tech Stack</h2>
+                <span class="text-2xl text-primary/60 handwritten drop-shadow-[0_0_10px_rgba(255,138,101,0.2)]">技能与工具</span>
+                <div class="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- AI Models & Platforms -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col group hover:border-primary/50 relative border border-primary/20 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-[#ff8a65] to-[#d84315] rounded-3xl blur opacity-0 group-hover:opacity-10 transition duration-700"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-darker border border-primary/30 flex items-center justify-center mb-6 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),0_0_15px_rgba(255,138,101,0.2)] group-hover:shadow-[0_0_25px_rgba(255,138,101,0.5)] transition-all duration-300">
+                            <i class="fas fa-brain text-2xl text-primary group-hover:text-white group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-6 group-hover:text-primary transition-colors">AI Models & Platforms</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-darker border border-primary/30 rounded-xl text-gray-300 text-sm hover:bg-primary/10 hover:text-white hover:border-primary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">GPT / Gemini</span>
+                            <span class="px-4 py-2 bg-darker border border-primary/30 rounded-xl text-gray-300 text-sm hover:bg-primary/10 hover:text-white hover:border-primary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">ClaudeCode / Codex</span>
+                            <span class="px-4 py-2 bg-darker border border-primary/30 rounded-xl text-gray-300 text-sm hover:bg-primary/10 hover:text-white hover:border-primary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">Coze</span>
+                            <span class="px-4 py-2 bg-darker border border-primary/30 rounded-xl text-gray-300 text-sm hover:bg-primary/10 hover:text-white hover:border-primary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">Midjourney/即梦</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engineering & Data -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col group hover:border-secondary/50 relative border border-secondary/20 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-secondary to-[#475569] rounded-3xl blur opacity-0 group-hover:opacity-10 transition duration-700"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-darker border border-secondary/30 flex items-center justify-center mb-6 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),0_0_15px_rgba(100,116,139,0.2)] group-hover:shadow-[0_0_25px_rgba(100,116,139,0.5)] transition-all duration-300">
+                            <i class="fas fa-terminal text-2xl text-secondary group-hover:text-white group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-6 group-hover:text-secondary transition-colors">Engineering & Data</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-darker border border-secondary/30 rounded-xl text-gray-300 text-sm hover:bg-secondary/10 hover:text-white hover:border-secondary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">Vibe coding</span>
+                            <span class="px-4 py-2 bg-darker border border-secondary/30 rounded-xl text-gray-300 text-sm hover:bg-secondary/10 hover:text-white hover:border-secondary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">AI SQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product & Language -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col group hover:border-primary/50 relative border border-primary/20 transition-all duration-500" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-[#e2b3a3] to-[#ff8a65] rounded-3xl blur opacity-0 group-hover:opacity-10 transition duration-700"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-darker border border-primary/30 flex items-center justify-center mb-6 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5),0_0_15px_rgba(255,138,101,0.2)] group-hover:shadow-[0_0_25px_rgba(255,138,101,0.5)] transition-all duration-300">
+                            <i class="fas fa-layer-group text-2xl text-primary group-hover:text-white group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-6 group-hover:text-primary transition-colors">Product & Language</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-darker border border-primary/30 rounded-xl text-gray-300 text-sm hover:bg-primary/10 hover:text-white hover:border-primary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">Figma</span>
+                            <span class="px-4 py-2 bg-darker border border-primary/30 rounded-xl text-gray-300 text-sm hover:bg-primary/10 hover:text-white hover:border-primary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">XMind</span>
+                            <span class="px-4 py-2 bg-darker border border-primary/30 rounded-xl text-gray-300 text-sm hover:bg-primary/10 hover:text-white hover:border-primary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">BEC 高级</span>
+                            <span class="px-4 py-2 bg-darker border border-primary/30 rounded-xl text-gray-300 text-sm hover:bg-primary/10 hover:text-white hover:border-primary/50 transition-all cursor-default shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">CET6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-12 border-t border-white/5 bg-[#050505] relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-3xl font-bold text-white mb-6">Let's Connect</h2>
+            <p class="text-[#bcaaa4] mb-8 max-w-lg mx-auto">Open for new opportunities. Feel free to reach out if you're looking for an AI Product Manager.</p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-12 relative font-mono text-sm">
+                <!-- Email -->
+                <div class="flex items-center gap-3 px-6 py-3 bg-[#1a1a1a] border border-gray-700 rounded-full text-[#bcaaa4] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] hover:border-primary hover:text-white transition-colors">
+                    <i class="fas fa-envelope text-primary"></i>
+                    <span>lixiuhui10160317@163.com</span>
+                </div>
+                <!-- Phone -->
+                <div class="flex items-center gap-3 px-6 py-3 bg-[#1a1a1a] border border-gray-700 rounded-full text-[#bcaaa4] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] hover:border-primary hover:text-white transition-colors">
+                    <i class="fas fa-phone-alt text-primary"></i>
+                    <span>18754406219</span>
+                </div>
+                <!-- WeChat -->
+                <div class="flex items-center gap-3 px-6 py-3 bg-[#1a1a1a] border border-gray-700 rounded-full text-[#bcaaa4] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] hover:border-[#07C160] hover:text-white transition-colors">
+                    <i class="fab fa-weixin text-[#07C160]"></i>
+                    <span>Cynthia--me</span>
+                </div>
+            </div>
+            
+            <p class="text-sm text-gray-600 font-mono">
+                &copy; 2026 Li Xiuhui. Designed with Vibe.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS Animation
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-slate-900/80', 'backdrop-blur-md', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-slate-900/80', 'backdrop-blur-md', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+/* 基础重置与字体 */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #020617; /* slate-950 */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(15, 23, 42, 1) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(15, 23, 42, 1) 0px, transparent 50%);
+    background-attachment: fixed;
+}
+
+.font-hand {
+    font-family: 'Patrick Hand', cursive;
+}
+
+/* 渐变文字 */
+.gradient-text {
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 毛玻璃卡片 (Bento Box / Glassmorphism) */
+.glass-card {
+    background: rgba(30, 41, 59, 0.4); /* slate-800 with opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* 导航栏毛玻璃 */
+.glass-nav {
+    background: rgba(2, 6, 23, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-nav.nav-scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    background: rgba(2, 6, 23, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 小药丸标签 (Tag Pills) */
+.tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.75rem;
+    color: #cbd5e1; /* slate-300 */
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+    background: rgba(59, 130, 246, 0.1); /* primary tint */
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #fff;
+}
+
+/* 工具标签卡片 (Tool Card) */
+.tool-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(15, 23, 42, 0.5); /* slate-900 */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    color: #cbd5e1;
+    transition: all 0.2s ease;
+}
+
+.tool-card:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* 工作经历子项 (Experience Bullets) */
+.exp-bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #94a3b8; /* slate-400 */
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.exp-bullet strong {
+    color: #e2e8f0; /* slate-200 */
+}
+
+.exp-dot {
+    margin-top: 0.4rem;
+    min-width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+}
+
+/* 联系按钮 */
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(59, 130, 246, 0.5); /* primary */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(59, 130, 246, 0.5);
+}

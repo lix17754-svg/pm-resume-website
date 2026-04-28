@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滴滴出行 - 宠物内容探索 | 李秀慧</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff8a65', // 科技橙
+                        secondary: '#64748b', // 蓝灰
+                        dark: '#0f172a',
+                        darker: '#020617',
+                        card: '#1e293b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        hand: ['Patrick Hand', 'cursive'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'dash': 'dash 1s linear infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 1, boxShadow: '0 0 15px rgba(255,138,101,0.5)' },
+                            '50%': { opacity: .7, boxShadow: '0 0 5px rgba(255,138,101,0.2)' }
+                        },
+                        'dash': {
+                            to: { strokeDashoffset: -20 }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Node Workflow specific styles */
+        .workflow-node {
+            background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9));
+            border: 1px solid rgba(100,116,139,0.3);
+            box-shadow: inset 1px 1px 0 rgba(255,255,255,0.05), 0 10px 30px -10px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+        .workflow-node:hover {
+            border-color: rgba(255,138,101,0.5);
+            transform: translateY(-2px);
+            box-shadow: inset 1px 1px 0 rgba(255,255,255,0.1), 0 15px 40px -10px rgba(255,138,101,0.2);
+        }
+        
+        .workflow-line {
+            stroke: #64748b;
+            stroke-width: 2;
+            stroke-dasharray: 6 4;
+            animation: dash 1.5s linear infinite;
+        }
+        
+        .workflow-line.active {
+            stroke: #ff8a65;
+            filter: drop-shadow(0 0 5px rgba(255,138,101,0.5));
+        }
+    </style>
+</head>
+<body class="bg-darker text-slate-200 font-sans antialiased overflow-x-hidden selection:bg-primary/30 selection:text-white">
+
+    <!-- Ambient Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[#ff8a65]/5 to-transparent"></div>
+        <div class="absolute top-1/4 right-10 w-96 h-96 bg-[#64748b] rounded-full mix-blend-screen filter blur-[120px] opacity-[0.08] animate-blob"></div>
+        <div class="absolute bottom-10 left-1/4 w-[500px] h-[500px] bg-[#ff8a65] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] animate-blob animation-delay-4000"></div>
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass top-0 transition-all duration-300 border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <a href="index.html#experience" class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2">
+                        <i class="fas fa-arrow-left"></i> <span>返回主页</span>
+                    </a>
+                </div>
+                <div class="text-sm font-medium text-gray-300 flex items-center gap-2">
+                    <i class="fas fa-car text-white"></i> 滴滴出行项目复盘
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-24 pb-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="text-center mb-10" data-aos="fade-down">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-darker border border-primary/30 text-primary text-xs font-mono mb-4 shadow-[0_0_15px_rgba(255,138,101,0.15)]">
+                <i class="fas fa-paw"></i> 0-1 宠物内容方向探索
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">滴滴出行 <br/> <span class="gradient-text">宠物影像生成</span></h1>
+            <p class="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                承接部门 0-1 探索项目，完成“模版生成 + 心情识别” Agent 的搭建与落地，并通过小红书、视频号等社媒矩阵验证，实现拉新、激活、转化与留存。
+            </p>
+        </div>
+
+        <!-- Section 1: Business Goals & Responsibilities (Bento Box) -->
+        <div class="mb-14" data-aos="fade-up">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <i class="fas fa-layer-group text-primary"></i> 项目概述与职责
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <!-- Goal -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col group hover:border-primary/30 md:col-span-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary group-hover:text-primary transition-colors text-sm">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">业务目标</h3>
+                    </div>
+                    <div class="flex flex-col gap-4 flex-1 justify-center">
+                        <p class="text-sm text-gray-300 leading-relaxed border-l-2 border-primary/50 pl-3">
+                            快速验证 0-1 宠物内容方向探索项目的 MVP。
+                        </p>
+                        <div class="bg-darker/50 p-4 rounded-xl border border-gray-700/50 shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+                            <p class="text-xs text-gray-400 mb-3">核心关注指标：</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20">点击率 (CTR)</span>
+                                <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs font-bold rounded-full border border-secondary/20">分享率</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsibilities -->
+                <div class="glass-card p-6 rounded-2xl flex flex-col group hover:border-primary/30 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary group-hover:text-primary transition-colors text-sm">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">具体负责事项</h3>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 flex-1">
+                        <div class="flex gap-3 items-start hover:bg-white/5 p-2 rounded-lg transition-colors">
+                            <div class="mt-1 bg-darker p-2 rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+                                <i class="fas fa-search text-primary text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-200">竞品调研与数据分析</h4>
+                                <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">量化需求优先级，通过漏斗分层定位流失节点，主导 AB 实验迭代策略。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start hover:bg-white/5 p-2 rounded-lg transition-colors">
+                            <div class="mt-1 bg-darker p-2 rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+                                <i class="fas fa-robot text-primary text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-200">Agent 构建与调优</h4>
+                                <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">基于 Coze 设计工作流，引入火山引擎组件，串联多模态生成链路。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start hover:bg-white/5 p-2 rounded-lg transition-colors">
+                            <div class="mt-1 bg-darker p-2 rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+                                <i class="fas fa-balance-scale text-primary text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-200">评测体系建设</h4>
+                                <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">制定热点度、还原度等离线评测标准，针对 Badcase 优化 Prompt 与工程链路。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start hover:bg-white/5 p-2 rounded-lg transition-colors">
+                            <div class="mt-1 bg-darker p-2 rounded shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+                                <i class="fas fa-seedling text-primary text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-200">用户增长策略 (PLG)</h4>
+                                <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">制定种子用户激活 SOP，细分画像输出定制化利益点，引导用户裂变。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section 2: Agent Workflow Diagram -->
+        <div class="mb-14" data-aos="fade-up">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <i class="fas fa-project-diagram text-primary"></i> 模版生成 Agent Workflow
+            </h2>
+            
+            <div class="glass-card p-8 pt-16 rounded-2xl relative">
+                <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay rounded-2xl pointer-events-none"></div>
+                
+                <!-- CSS Workflow Diagram -->
+                <div class="relative w-full max-w-5xl mx-auto py-4 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-4">
+                    
+                    <!-- SVG Background Lines -->
+                    <svg class="absolute inset-0 w-full h-full hidden md:block pointer-events-none" style="z-index: 1;">
+                        <!-- Main Flow -->
+                        <line x1="8%" y1="35%" x2="92%" y2="35%" class="workflow-line active" />
+                        <!-- Branch Flow (Image Enhance) -->
+                        <path d="M 22% 35% L 22% 10% L 36% 10% L 36% 35%" fill="none" class="workflow-line" />
+                        
+                        <!-- Loop Flow (Feedback -> LLM 1 & 2) -->
+                        <path d="M 92% 35% L 92% 75% L 75% 75%" fill="none" class="workflow-line active" />
+                        <path d="M 75% 75% L 50% 75% L 50% 45%" fill="none" class="workflow-line" />
+                        <path d="M 75% 75% L 65% 75% L 65% 45%" fill="none" class="workflow-line" />
+                    </svg>
+                    
+                    <!-- SVG Background Lines (Mobile - Vertical) -->
+                    <svg class="absolute inset-0 w-full h-full md:hidden pointer-events-none" style="z-index: 1;">
+                        <!-- Main Flow -->
+                        <line x1="50%" y1="5%" x2="50%" y2="95%" class="workflow-line active" />
+                    </svg>
+
+                    <!-- Row 1: The Main Process -->
+                    <div class="w-full flex flex-col md:flex-row items-center justify-between gap-6 md:gap-2 mb-0 md:mb-32 relative z-10">
+                        
+                        <!-- Node 1: Input -->
+                        <div class="workflow-node p-4 rounded-xl text-center w-32 flex flex-col items-center gap-2 shadow-[0_0_15px_rgba(255,138,101,0.2)] border-primary/40 relative z-10">
+                            <i class="fas fa-camera-retro text-2xl text-primary"></i>
+                            <span class="text-xs font-bold text-white">图像采集</span>
+                            <span class="text-[10px] text-gray-400">输入宠物素材</span>
+                        </div>
+
+                        <!-- Node 2 & Branch -->
+                        <div class="flex flex-col items-center gap-4 relative z-10">
+                            <!-- Branch: Image Enhancement -->
+                            <div class="workflow-node p-3 rounded-xl text-center w-36 border-secondary/50 hidden md:flex flex-col items-center gap-1 absolute -top-24 left-1/2 transform -translate-x-1/2 bg-darker/90 shadow-[0_0_15px_rgba(100,116,139,0.4)]">
+                                <i class="fas fa-wand-magic-sparkles text-secondary text-sm"></i>
+                                <span class="text-[11px] text-white font-bold">智能画质增强</span>
+                                <span class="text-[9px] text-primary bg-primary/10 px-2 py-0.5 rounded-full mt-1">⚠️ 图像模糊时触发</span>
+                            </div>
+
+                            <div class="workflow-node p-4 rounded-xl text-center w-32 flex flex-col items-center gap-2">
+                                <i class="fas fa-microchip text-2xl text-secondary"></i>
+                                <span class="text-xs font-bold text-white">质量研判</span>
+                                <span class="text-[10px] text-green-400 bg-green-400/10 px-2 py-0.5 rounded-full mt-1">清晰度达标 ✅</span>
+                            </div>
+                        </div>
+
+                        <!-- Node 3: LLM 1 -->
+                        <div class="workflow-node p-4 rounded-xl text-center w-32 flex flex-col items-center gap-2 relative z-10" id="node-llm1">
+                            <i class="fas fa-eye text-2xl text-secondary"></i>
+                            <span class="text-xs font-bold text-white">视觉特征解析</span>
+                            <span class="text-[10px] text-gray-400">LLM 深度语义提取</span>
+                        </div>
+
+                        <!-- Node 4: LLM 2 -->
+                        <div class="workflow-node p-4 rounded-xl text-center w-32 flex flex-col items-center gap-2 relative z-10" id="node-llm2">
+                            <i class="fas fa-layer-group text-2xl text-primary"></i>
+                            <span class="text-xs font-bold text-white">多模态融合生成</span>
+                            <span class="text-[10px] text-gray-400">即梦模型 + 定制 Prompt</span>
+                        </div>
+
+                        <!-- Node 5: Output & Scoring -->
+                        <div class="flex flex-col items-center gap-4 relative z-10">
+                            <!-- New Branch: Score Validation -->
+                            <div class="workflow-node p-3 rounded-xl text-center w-36 border-green-500/40 hidden md:flex flex-col items-center gap-1 absolute -top-24 left-1/2 transform -translate-x-1/2 bg-darker/90 shadow-[0_0_15px_rgba(74,222,128,0.2)]">
+                                <i class="fas fa-check-double text-green-400 text-sm"></i>
+                                <span class="text-[11px] text-white font-bold">模型打分校验</span>
+                                <span class="text-[9px] text-green-400 bg-green-400/10 px-2 py-0.5 rounded-full mt-1">分数 ≥ 90分 准出</span>
+                            </div>
+                            
+                            <div class="workflow-node p-4 rounded-xl text-center w-32 flex flex-col items-center gap-2 shadow-[0_0_15px_rgba(255,138,101,0.2)] border-primary/40 relative z-10">
+                                <i class="fas fa-images text-2xl text-primary"></i>
+                                <span class="text-xs font-bold text-white">专属影像交付</span>
+                                <span class="text-[10px] text-gray-400">高质量定制化模版</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 2: The Loop (Feedback) - Desktop only visual placement, Mobile inline -->
+                    <div class="w-full flex md:absolute md:bottom-6 md:right-[8%] md:w-auto flex-col items-center z-10">
+                         <div class="workflow-node p-4 rounded-xl text-center w-40 flex flex-col items-center gap-2 shadow-[0_0_15px_rgba(100,116,139,0.3)] border-secondary/50 bg-slate-900/90 backdrop-blur">
+                            <i class="fas fa-comments text-2xl text-secondary"></i>
+                            <span class="text-xs font-bold text-white">用户真实反馈</span>
+                            <span class="text-[10px] text-gray-400">闭环优化 Workflow 策略</span>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="mt-8 text-center text-xs text-gray-400 font-mono">
+                    <i class="fas fa-sync-alt text-primary animate-spin-slow inline-block"></i> Workflow 闭环：通过前置条件分支与后置模型打分校验保障质量，结合用户反馈持续迭代 Prompt 策略。
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Evaluation Standards & Tracking Design -->
+        <div class="mb-14" data-aos="fade-up">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <i class="fas fa-tasks text-primary"></i> 离线评估集与埋点设计
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Image 1: Evaluation Standards -->
+                <div class="relative group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                    <!-- Glowing background effect -->
+                    <div class="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-primary rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-700 animate-pulse-glow"></div>
+                    <!-- Image container -->
+                    <div class="relative glass-card p-4 rounded-2xl flex flex-col h-full">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fas fa-clipboard-check text-primary"></i>
+                            <h3 class="text-sm font-bold text-white">评测标准示例</h3>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-gray-700/50 bg-darker flex-1 flex items-center justify-center relative">
+                            <img src="pet-eval.jpg" alt="宠物模版评估标准" class="w-full h-auto max-h-[300px] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" onerror="this.src='https://via.placeholder.com/800x400/1e293b/ff8a65?text=Image+Missing+pet-eval.jpg'">
+                            <!-- Glassmorphism overlay on hover -->
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-darker/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none flex items-center justify-center">
+                                <div class="px-4 py-2 bg-darker/80 backdrop-blur-sm rounded-full text-white text-sm font-medium border border-white/10 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    <i class="fas fa-search-plus"></i> 点击查看大图
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4 leading-relaxed">宠物 Agent 模版生成评测标准（包含热点度、还原度等维度）。</p>
+                    </div>
+                </div>
+
+                <!-- Image 2: Tracking Design -->
+                <div class="relative group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                    <!-- Glowing background effect -->
+                    <div class="absolute -inset-1 bg-gradient-to-r from-secondary via-primary to-secondary rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-700 animate-pulse-glow"></div>
+                    <!-- Image container -->
+                    <div class="relative glass-card p-4 rounded-2xl flex flex-col h-full">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fas fa-route text-secondary"></i>
+                            <h3 class="text-sm font-bold text-white">用户行为埋点设计</h3>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-gray-700/50 bg-darker flex-1 flex items-center justify-center relative">
+                            <img src="tracking.jpg" alt="埋点设计" class="w-full h-auto max-h-[300px] object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" onerror="this.src='https://via.placeholder.com/800x400/1e293b/64748b?text=Image+Missing+tracking.jpg'">
+                            <!-- Glassmorphism overlay on hover -->
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-darker/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none flex items-center justify-center">
+                                <div class="px-4 py-2 bg-darker/80 backdrop-blur-sm rounded-full text-white text-sm font-medium border border-white/10 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    <i class="fas fa-search-plus"></i> 点击查看大图
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4 leading-relaxed">通过科学的埋点设计，精确定位用户流失节点，驱动 AB 实验策略迭代。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Results -->
+            <div class="mt-16" data-aos="fade-up">
+                <h3 class="text-xl font-bold text-white mb-8 flex items-center justify-center gap-3">
+                    <i class="fas fa-trophy text-primary"></i> 核心业务成果
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <!-- Metric 1 -->
+                    <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:border-primary/50 relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-all"></div>
+                        <i class="fas fa-chart-line text-3xl text-primary mb-4 group-hover:scale-110 transition-transform"></i>
+                        <div class="flex items-baseline gap-2 mb-2">
+                            <h4 class="text-2xl font-bold text-white">CTR +37%</h4>
+                        </div>
+                        <p class="text-sm text-green-400 font-mono bg-green-400/10 px-2 py-1 rounded mb-3">分享率 +29.7%</p>
+                        <p class="text-xs text-gray-400">核心转化指标大幅提升<br>成功验证 MVP</p>
+                    </div>
+                    
+                    <!-- Metric 2 -->
+                    <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:border-secondary/50 relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 w-16 h-16 bg-secondary/10 rounded-full blur-xl group-hover:bg-secondary/20 transition-all"></div>
+                        <i class="fas fa-star text-3xl text-secondary mb-4 group-hover:scale-110 transition-transform"></i>
+                        <div class="flex items-baseline gap-2 mb-2">
+                            <h4 class="text-2xl font-bold text-white">93+ 稳定评分</h4>
+                        </div>
+                        <p class="text-sm text-green-400 font-mono bg-green-400/10 px-2 py-1 rounded mb-3">满意度 90%+</p>
+                        <p class="text-xs text-gray-400">评测标准与工程链路双优<br>保障高质量体验</p>
+                    </div>
+                    
+                    <!-- Metric 3 -->
+                    <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center text-center group hover:border-primary/50 relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-all"></div>
+                        <i class="fas fa-users text-3xl text-primary mb-4 group-hover:scale-110 transition-transform"></i>
+                        <div class="flex items-baseline gap-2 mb-2">
+                            <h4 class="text-2xl font-bold text-white">1000+</h4>
+                        </div>
+                        <p class="text-sm text-green-400 font-mono bg-green-400/10 px-2 py-1 rounded mb-3">种子用户增长</p>
+                        <p class="text-xs text-gray-400">精准定位高潜群体<br>实现冷启动高效拉新</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Back Button -->
+        <div class="text-center mt-12" data-aos="fade-in">
+            <a href="index.html#experience" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-darker border border-gray-700 text-gray-300 hover:text-white hover:border-primary transition-all shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] text-sm">
+                <i class="fas fa-home"></i> 返回简历主页
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center">
+            <button class="absolute top-4 right-4 text-white/50 hover:text-white bg-darker/50 hover:bg-darker w-10 h-10 rounded-full flex items-center justify-center transition-all z-10" onclick="closeLightbox()">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300" onclick="event.stopPropagation()">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-cubic'
+        });
+
+        // Navbar blur on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-slate-900/90', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-slate-900/90', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.remove('opacity-0', 'pointer-events-none');
+            lightbox.classList.add('opacity-100', 'pointer-events-auto');
+            setTimeout(() => {
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('opacity-100', 'pointer-events-auto');
+            lightbox.classList.add('opacity-0', 'pointer-events-none');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightboxImg.src = '';
+            }, 300); // Wait for transition
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+        
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !lightbox.classList.contains('opacity-0')) {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

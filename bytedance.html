@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字节跳动 - 实习经历复盘 | 李秀慧</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff8a65', // 科技橙
+                        secondary: '#64748b', // 蓝灰色
+                        accent: '#94a3b8', // 浅蓝灰
+                        dark: '#0f172a',
+                        darker: '#020617',
+                        card: '#1e293b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        hand: ['Patrick Hand', 'cursive'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'flow-down': 'flow-down 3s linear infinite',
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'flow-down': {
+                            '0%': { transform: 'translateY(-100%)', opacity: 0 },
+                            '50%': { opacity: 1 },
+                            '100%': { transform: 'translateY(1000%)', opacity: 0 }
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 1, boxShadow: '0 0 15px rgba(255,138,101,0.5)' },
+                            '50%': { opacity: .7, boxShadow: '0 0 5px rgba(255,138,101,0.2)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Timeline specific styles */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(255,138,101,0.1), rgba(100,116,139,0.5), rgba(255,138,101,0.1));
+            transform: translateX(-50%);
+        }
+        
+        .timeline-flow-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, #ff8a65, transparent);
+            transform: translateX(-50%);
+            animation: flow-down 4s linear infinite;
+            filter: drop-shadow(0 0 8px #ff8a65);
+        }
+
+        .metric-card {
+            background: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9));
+            border: 1px solid rgba(100,116,139,0.2);
+            box-shadow: inset 1px 1px 0 rgba(255,255,255,0.05), 0 10px 30px -10px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            border-color: rgba(255,138,101,0.4);
+            transform: translateY(-2px);
+            box-shadow: inset 1px 1px 0 rgba(255,255,255,0.1), 0 15px 40px -10px rgba(255,138,101,0.15);
+        }
+        
+        /* Node connection dots */
+        .node-dot {
+            width: 20px;
+            height: 20px;
+            background: #020617;
+            border: 3px solid #64748b;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover .node-dot {
+            border-color: #ff8a65;
+            box-shadow: 0 0 15px rgba(255,138,101,0.5);
+            background: #ff8a65;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 20px;
+            }
+            .timeline-flow-dot {
+                left: 20px;
+            }
+            .node-dot {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-darker text-slate-200 font-sans antialiased overflow-x-hidden selection:bg-primary/30 selection:text-white">
+
+    <!-- Ambient Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-[#ff8a65]/5 to-transparent"></div>
+        <div class="absolute top-1/3 right-10 w-96 h-96 bg-[#64748b] rounded-full mix-blend-screen filter blur-[120px] opacity-[0.08] animate-blob"></div>
+        <div class="absolute bottom-10 left-1/4 w-[500px] h-[500px] bg-[#ff8a65] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.05] animate-blob animation-delay-4000"></div>
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass top-0 transition-all duration-300 border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <a href="index.html#experience" class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2">
+                        <i class="fas fa-arrow-left"></i> <span>返回主页</span>
+                    </a>
+                </div>
+                <div class="text-sm font-medium text-gray-300 flex items-center gap-2">
+                    <i class="fab fa-tiktok text-white"></i> 字节跳动实习复盘
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-24 pb-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="text-center mb-10" data-aos="fade-down">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-darker border border-primary/30 text-primary text-xs font-mono mb-4 shadow-[0_0_15px_rgba(255,138,101,0.15)]">
+                <i class="fas fa-microchip"></i> 模型微调与评测体系落地
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">Tiktok Local Service <br/> <span class="gradient-text">内容判别体系迭代</span></h1>
+            <p class="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                作为 AI 产品经理，主导生活服务内容判别体系的评测与迭代闭环，通过数据驱动优化大模型表现，最终实现业务指标的显著增长。
+            </p>
+        </div>
+
+        <!-- Section 1: Target & Metrics -->
+        <div class="mb-14" data-aos="fade-up">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <i class="fas fa-bullseye text-primary"></i> 业务目标与拆解指标
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                <!-- Ultimate Goal -->
+                <div class="md:col-span-4 metric-card p-6 rounded-2xl flex flex-col justify-center items-center text-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-12 h-12 rounded-full bg-darker border border-primary/30 flex items-center justify-center text-primary text-xl mb-3 shadow-[0_0_15px_rgba(255,138,101,0.2)]">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-1">终极目标 / Ultimate Goal</h3>
+                    <p class="text-2xl font-bold text-white">提升 <span class="text-primary">LT</span></p>
+                    <p class="text-[10px] text-gray-500 mt-1 font-mono">(Life Time Value)</p>
+                </div>
+                
+                <!-- Process Metrics -->
+                <div class="md:col-span-8 metric-card p-6 rounded-2xl">
+                    <h3 class="text-gray-400 text-xs uppercase tracking-widest mb-4">过程指标 / Process Metrics</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 bg-darker border border-secondary/30 rounded-md text-gray-300 text-xs flex items-center gap-1.5 hover:border-secondary transition-colors cursor-default">
+                            <i class="fas fa-star text-yellow-500/70"></i> 收藏
+                        </span>
+                        <span class="px-3 py-1.5 bg-darker border border-secondary/30 rounded-md text-gray-300 text-xs flex items-center gap-1.5 hover:border-secondary transition-colors cursor-default">
+                            <i class="fas fa-share-alt text-blue-400/70"></i> 分享
+                        </span>
+                        <span class="px-3 py-1.5 bg-darker border border-secondary/30 rounded-md text-gray-300 text-xs flex items-center gap-1.5 hover:border-secondary transition-colors cursor-default">
+                            <i class="fas fa-user-plus text-green-400/70"></i> 关注
+                        </span>
+                        <span class="px-3 py-1.5 bg-darker border border-secondary/30 rounded-md text-gray-300 text-xs flex items-center gap-1.5 hover:border-secondary transition-colors cursor-default">
+                            <i class="fas fa-map-marker-alt text-red-400/70"></i> POI 3s访问
+                        </span>
+                        <span class="px-3 py-1.5 bg-darker border border-secondary/30 rounded-md text-gray-300 text-xs flex items-center gap-1.5 hover:border-secondary transition-colors cursor-default">
+                            <i class="fas fa-camera text-purple-400/70"></i> 截图
+                        </span>
+                        <span class="px-3 py-1.5 bg-darker border border-secondary/30 rounded-md text-gray-300 text-xs flex items-center gap-1.5 hover:border-secondary transition-colors cursor-default">
+                            <i class="fas fa-store text-orange-400/70"></i> 访问商家职人主页
+                        </span>
+                    </div>
+                    <div class="mt-4 p-3 rounded-lg bg-darker/50 border border-gray-800 text-xs text-gray-400 leading-relaxed">
+                        通过大盘内容 Case 抽取与数据分析，将复杂的种草心智转化为以上可量化的过程指标，作为模型训练与评测的锚点。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Flowchart -->
+        <div class="mb-14" data-aos="fade-up">
+            <h2 class="text-xl font-bold text-white mb-8 flex items-center gap-2 justify-center md:justify-start">
+                <i class="fas fa-project-diagram text-secondary"></i> 模型迭代与评测工作流
+            </h2>
+            
+            <!-- Flowchart Image with Vibe Edge -->
+            <div class="relative max-w-4xl mx-auto group cursor-pointer" onclick="openLightbox(this.querySelector('img').src)">
+                <!-- Glowing background effect -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-primary rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-700 animate-pulse-glow"></div>
+                <!-- Image container -->
+                <div class="relative rounded-2xl overflow-hidden border border-gray-700/50 shadow-[0_0_30px_rgba(0,0,0,0.8)] bg-darker p-1">
+                    <img src="bytedance-flow.jpg" alt="模型迭代与评测工作流" class="w-full h-auto rounded-xl object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500">
+                    <!-- Glassmorphism overlay on hover -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-darker/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none flex items-center justify-center">
+                        <div class="px-4 py-2 bg-darker/80 backdrop-blur-sm rounded-full text-white text-sm font-medium border border-white/10 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            <i class="fas fa-search-plus"></i> 点击查看大图
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Final Results -->
+        <div class="mb-10" data-aos="fade-up">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <i class="fas fa-award text-yellow-500"></i> 最终业务成果
+            </h2>
+            
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Result 1 -->
+                <div class="glass-card p-4 rounded-xl border-t-2 border-t-green-500 flex flex-col items-center text-center hover:-translate-y-2 transition-transform">
+                    <div class="text-green-400 text-2xl mb-1"><i class="fas fa-check-circle"></i></div>
+                    <div class="text-2xl font-extrabold text-white mb-1">+7%</div>
+                    <div class="text-xs text-gray-400 font-medium">模型准确率提升</div>
+                </div>
+                
+                <!-- Result 2 -->
+                <div class="glass-card p-4 rounded-xl border-t-2 border-t-green-400 flex flex-col items-center text-center hover:-translate-y-2 transition-transform">
+                    <div class="text-green-400 text-2xl mb-1"><i class="fas fa-search"></i></div>
+                    <div class="text-2xl font-extrabold text-white mb-1">+6%</div>
+                    <div class="text-xs text-gray-400 font-medium">模型召回率提升</div>
+                </div>
+
+                <!-- Result 3 -->
+                <div class="glass-card p-4 rounded-xl border-t-2 border-t-primary flex flex-col items-center text-center hover:-translate-y-2 transition-transform relative overflow-hidden">
+                    <div class="absolute inset-0 bg-primary/5"></div>
+                    <div class="relative z-10">
+                        <div class="text-primary text-2xl mb-1"><i class="fas fa-seedling"></i></div>
+                        <div class="text-2xl font-extrabold text-white mb-1">+10.9%</div>
+                        <div class="text-xs text-gray-400 font-medium">分发种草提升</div>
+                    </div>
+                </div>
+
+                <!-- Result 4 -->
+                <div class="glass-card p-4 rounded-xl border-t-2 border-t-primary flex flex-col items-center text-center hover:-translate-y-2 transition-transform relative overflow-hidden">
+                    <div class="absolute inset-0 bg-primary/10"></div>
+                    <div class="relative z-10">
+                        <div class="text-primary text-2xl mb-1"><i class="fas fa-heart"></i></div>
+                        <div class="text-2xl font-extrabold text-white mb-1">+24.7%</div>
+                        <div class="text-xs text-gray-400 font-medium">心智指标提升</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12" data-aos="fade-in">
+            <a href="index.html#experience" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-darker border border-gray-700 text-gray-300 hover:text-white hover:border-primary transition-all shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] text-sm">
+                <i class="fas fa-home"></i> 返回简历主页
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center">
+            <button class="absolute top-4 right-4 text-white/50 hover:text-white bg-darker/50 hover:bg-darker w-10 h-10 rounded-full flex items-center justify-center transition-all z-10" onclick="closeLightbox()">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300" onclick="event.stopPropagation()">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-cubic'
+        });
+
+        // Navbar blur on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-slate-900/90', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-slate-900/90', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.remove('opacity-0', 'pointer-events-none');
+            lightbox.classList.add('opacity-100', 'pointer-events-auto');
+            setTimeout(() => {
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('opacity-100', 'pointer-events-auto');
+            lightbox.classList.add('opacity-0', 'pointer-events-none');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightboxImg.src = '';
+            }, 300); // Wait for transition
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+        
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !lightbox.classList.contains('opacity-0')) {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

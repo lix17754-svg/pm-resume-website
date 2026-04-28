@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科技感橙色 - 卡片小样测试</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        /* 核心调色板：红铜/香槟金/科技橙 */
+                        tech: {
+                            glow: '#ff8a65', /* 发光橙 */
+                            copper: '#bcaaa4', /* 铜色文字 */
+                            bg: '#0a0a0a', /* 极黑背景 */
+                            card: '#141414', /* 深灰卡片 */
+                            border: 'rgba(255, 138, 101, 0.15)', /* 橙色细边框 */
+                            btn: '#242424', /* 按钮底色 */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 底部巨大的氛围光晕 (Ambient Glow) */
+        .ambient-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 138, 101, 0.08) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* 核心卡片样式 (The Box) */
+        .tech-card {
+            position: relative;
+            background: linear-gradient(145deg, #1f1f1f 0%, #0d0d0d 100%);
+            border-radius: 24px;
+            padding: 2rem;
+            width: 100%;
+            max-w: 500px;
+            z-index: 10;
+            /* 关键：内阴影和外发光的结合 */
+            box-shadow: 
+                inset 1px 1px 0px rgba(255, 255, 255, 0.05), /* 顶部细微高光 */
+                inset -1px -1px 0px rgba(0, 0, 0, 0.5), /* 底部暗影 */
+                0 20px 40px -10px rgba(0, 0, 0, 0.8), /* 基础投影 */
+                0 0 0 1px rgba(255, 138, 101, 0.1); /* 基础边框 */
+            transition: all 0.4s ease;
+        }
+
+        /* 悬浮时的“呼吸感”光效 */
+        .tech-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                inset 1px 1px 0px rgba(255, 255, 255, 0.1),
+                inset -1px -1px 0px rgba(0, 0, 0, 0.5),
+                0 25px 50px -12px rgba(0, 0, 0, 0.9),
+                0 0 0 1px rgba(255, 138, 101, 0.2), /* 边框变亮 */
+                -20px -20px 60px -20px rgba(255, 138, 101, 0.15); /* 左上角弥散光 */
+        }
+
+        /* 伪元素做左上角的强光边框渐变 */
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            padding: 1px; /* 边框宽度 */
+            background: linear-gradient(135deg, rgba(255, 138, 101, 0.5) 0%, rgba(255, 255, 255, 0) 40%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .tech-card:hover::before {
+            opacity: 1;
+        }
+
+        /* 按钮样式 (Neumorphism / Inner Shadow) */
+        .tech-btn {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #d4d4d4;
+            transition: all 0.3s ease;
+        }
+
+        .tech-btn:hover {
+            background: #242424;
+            color: #ffffff;
+            border-color: rgba(255, 138, 101, 0.3);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 138, 101, 0.1);
+        }
+
+        /* 圆形 Icon 按钮 */
+        .icon-btn {
+            background: linear-gradient(145deg, #2a2a2a, #141414);
+            box-shadow: 
+                5px 5px 10px #0a0a0a, 
+                -5px -5px 10px #1e1e1e,
+                inset 1px 1px 0px rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .icon-btn:hover {
+            border-color: rgba(255, 138, 101, 0.4);
+            color: #ff8a65;
+        }
+        
+        /* 文本渐变 (针对主标题等需要突出的地方，如果不需要可以不用) */
+        .text-glow {
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 138, 101, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 底部大光晕 -->
+    <div class="ambient-glow"></div>
+
+    <!-- 小样容器 -->
+    <div class="w-full max-w-3xl p-6 flex flex-col gap-8 items-center z-10 relative">
+        
+        <div class="text-center mb-4">
+            <h2 class="text-tech-glow font-mono text-sm tracking-widest uppercase mb-2">Color Matching Demo</h2>
+            <p class="text-gray-400 text-sm">将鼠标悬停在卡片和按钮上查看光影交互效果</p>
+        </div>
+
+        <!-- 完美复刻参考图的卡片 -->
+        <div class="tech-card flex flex-col justify-between min-h-[220px]">
+            
+            <div class="flex justify-between items-start mb-6">
+                <h3 class="text-2xl font-semibold text-white tracking-tight text-glow">Card color matching</h3>
+                
+                <!-- 右上角 Icon 按钮 -->
+                <button class="icon-btn w-10 h-10 rounded-full flex items-center justify-center text-gray-300">
+                    <!-- 这里用一个山峰图标代替参考图里的 logo -->
+                    <i class="fas fa-mountain"></i>
+                </button>
+            </div>
+
+            <p class="text-[#a3a3a3] text-[15px] leading-relaxed max-w-[85%] font-light">
+                The vast and boundless horizon is my love,<br>
+                the most dazzling ethnic style.
+            </p>
+
+            <div class="flex justify-between items-end mt-8">
+                <!-- 底部按钮 -->
+                <button class="tech-btn px-8 py-2.5 rounded-full text-sm font-medium">
+                    Got it
+                </button>
+                
+                <!-- 底部数字 -->
+                <span class="text-[#a3a3a3] text-sm font-mono opacity-60">01</span>
+            </div>
+            
+        </div>
+        
+        <!-- 另一个应用在简历模块上的例子 -->
+        <div class="tech-card flex flex-col gap-4">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-xl bg-[#1a1a1a] border border-[#ff8a65]/20 flex items-center justify-center text-[#ff8a65] shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h4 class="text-lg font-medium text-white">Agent 工作流设计</h4>
+            </div>
+            <p class="text-[#a3a3a3] text-sm leading-relaxed">
+                在真实简历中，你的工作经历、技能卡片都会采用这种材质。深邃的底色配合细微的金属橙色高光，让你的 AIGC 背景显得更加专业和极客。
+            </p>
+            <div class="mt-2 flex gap-2">
+                <span class="px-3 py-1 bg-[#1a1a1a] border border-[#333] rounded-md text-xs text-[#a3a3a3] hover:text-[#ff8a65] hover:border-[#ff8a65]/30 cursor-default transition-colors">Coze</span>
+                <span class="px-3 py-1 bg-[#1a1a1a] border border-[#333] rounded-md text-xs text-[#a3a3a3] hover:text-[#ff8a65] hover:border-[#ff8a65]/30 cursor-default transition-colors">Dify</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
