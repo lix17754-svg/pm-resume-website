@@ -361,6 +361,95 @@
                 </div>
             </div>
 
+            <!-- Section 4: Template Generation & Prompt Strategy -->
+            <div id="aigc-demo" class="mt-20 mb-14 scroll-mt-24" data-aos="fade-up">
+                <h2 class="text-xl font-bold text-white mb-8 flex items-center justify-center md:justify-start gap-3">
+                    <i class="fas fa-magic text-primary"></i> 宠物影像模版生成与 AIGC Prompt 示例
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                    <!-- Image Showcase -->
+                    <div class="lg:col-span-5 relative group cursor-pointer" onclick="openLightbox('模版.jpg')">
+                        <!-- Background glow -->
+                        <div class="absolute -inset-2 bg-gradient-to-tr from-primary via-purple-500 to-secondary rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition duration-700 animate-pulse-slow"></div>
+                        <!-- Card -->
+                        <div class="relative glass-card p-2 rounded-3xl h-full flex flex-col border border-white/10 overflow-hidden transform transition-all duration-500 group-hover:scale-[1.02]">
+                            <div class="absolute top-4 left-4 z-20 px-3 py-1 bg-darker/80 backdrop-blur-md rounded-full border border-white/10 flex items-center gap-2 shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_5px_rgba(74,222,128,0.8)]"></span>
+                                <span class="text-xs font-bold text-white tracking-wider">OUTPUT</span>
+                            </div>
+                            <img src="模版.jpg" alt="模版生成效果" class="w-full h-full object-cover rounded-2xl" onerror="this.src='https://via.placeholder.com/600x800/1e293b/ff8a65?text=Image+Missing+模版.jpg'">
+                            
+                            <!-- Hover overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-darker/90 via-darker/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col justify-end p-6 rounded-2xl pointer-events-none">
+                                <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                    <h4 class="text-white font-bold text-lg mb-1 drop-shadow-md">宠物影像生成</h4>
+                                    <p class="text-gray-300 text-xs drop-shadow-md">基于微调模型与定制化 Prompt</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prompt Display -->
+                    <div class="lg:col-span-7 relative group">
+                        <!-- Decorative elements -->
+                        <div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl"></div>
+                        <div class="absolute -left-4 -bottom-4 w-32 h-32 bg-secondary/20 rounded-full blur-2xl"></div>
+                        
+                        <div class="relative glass-card rounded-3xl h-full border border-gray-700/50 bg-[#0a0f1c] overflow-hidden flex flex-col shadow-2xl transition-all duration-500 hover:border-primary/30">
+                            <!-- Terminal Header -->
+                            <div class="px-6 py-4 border-b border-gray-800 bg-[#0f172a]/80 flex justify-between items-center backdrop-blur-md">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_5px_rgba(239,68,68,0.5)]"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500/80 shadow-[0_0_5px_rgba(234,179,8,0.5)]"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500/80 shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
+                                    <span class="ml-3 text-xs font-mono text-gray-500">prompt_template.txt</span>
+                                </div>
+                                <div class="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded border border-primary/20 flex items-center gap-1.5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+                                    <i class="fas fa-code-branch"></i> Core Strategy
+                                </div>
+                            </div>
+                            
+                            <!-- Terminal Body -->
+                            <div class="p-6 md:p-8 flex-1 font-mono text-[13px] md:text-sm leading-loose overflow-y-auto">
+                                <div class="text-gray-400 mb-6 italic flex items-center gap-2">
+                                    <i class="fas fa-terminal text-gray-600"></i>
+                                    <span class="text-gray-500"># System Instruction</span>
+                                </div>
+                                
+                                <div class="space-y-6 text-gray-300">
+                                    <div class="bg-white/5 p-3 rounded-lg border-l-2 border-secondary inline-block">
+                                        <span class="text-secondary font-bold">（宠物识别特征）</span>
+                                    </div>
+
+                                    <p class="leading-[2.5]">这是一幅<span class="text-[#a855f7] font-bold bg-[#a855f7]/10 px-1.5 py-0.5 mx-1 rounded border border-[#a855f7]/30 shadow-[0_0_5px_rgba(168,85,247,0.1)]">【艺术风格】</span>的<span class="text-blue-400 font-bold bg-blue-400/10 px-1.5 py-0.5 mx-1 rounded border border-blue-400/30 shadow-[0_0_5px_rgba(56,130,246,0.1)]">【镜头构图】</span>场景，<br>
+                                    具有<span class="text-emerald-400 font-bold bg-emerald-400/10 px-1.5 py-0.5 mx-1 rounded border border-emerald-400/30 shadow-[0_0_5px_rgba(52,211,153,0.1)]">【绘画技法/材质表现】</span>。</p>
+                                    
+                                    <p class="leading-[2.5]">画面中，一只<span class="text-primary font-bold bg-primary/10 px-1.5 py-0.5 mx-1 rounded border border-primary/30 shadow-[0_0_5px_rgba(255,138,101,0.1)]">【宠物主体描述】</span><br>
+                                    位于<span class="text-orange-400 font-bold bg-orange-400/10 px-1.5 py-0.5 mx-1 rounded border border-orange-400/30 shadow-[0_0_5px_rgba(251,146,60,0.1)]">【场景主体】</span>，<br>
+                                    正在<span class="text-pink-400 font-bold bg-pink-400/10 px-1.5 py-0.5 mx-1 rounded border border-pink-400/30 shadow-[0_0_5px_rgba(244,114,182,0.1)]">【动作行为】</span>，<br>
+                                    神态<span class="text-yellow-400 font-bold bg-yellow-400/10 px-1.5 py-0.5 mx-1 rounded border border-yellow-400/30 shadow-[0_0_5px_rgba(250,204,21,0.1)]">【情绪描述】</span>。</p>
+                                    
+                                    <p class="leading-[2.5]">周围摆放着<span class="text-cyan-400 font-bold bg-cyan-400/10 px-1.5 py-0.5 mx-1 rounded border border-cyan-400/30 shadow-[0_0_5px_rgba(34,211,238,0.1)]">【道具装饰元素】</span>，<br>
+                                    细节精致丰富。</p>
+                                    
+                                    <p class="leading-[2.5]">背景是<span class="text-indigo-400 font-bold bg-indigo-400/10 px-1.5 py-0.5 mx-1 rounded border border-indigo-400/30 shadow-[0_0_5px_rgba(129,140,248,0.1)]">【背景环境元素】</span>，<br>
+                                    光影<span class="text-rose-400 font-bold bg-rose-400/10 px-1.5 py-0.5 mx-1 rounded border border-rose-400/30 shadow-[0_0_5px_rgba(251,113,133,0.1)]">【光线描述】</span>，</p>
+                                    
+                                    <p class="leading-[2.5]">整体呈现出<span class="text-white font-bold bg-white/10 px-1.5 py-0.5 mx-1 rounded border border-white/30 shadow-[0_0_10px_rgba(255,255,255,0.3)]">【整体氛围关键词】</span>的视觉氛围。</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Terminal Footer -->
+                            <div class="px-6 py-3 border-t border-gray-800 bg-[#0f172a]/50 text-xs text-gray-500 font-mono flex justify-between items-center">
+                                <span><i class="fas fa-check-circle text-green-500/70 mr-1"></i> Structural Prompting</span>
+                                <span class="animate-pulse font-bold text-lg leading-none">_</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Business Results -->
             <div class="mt-16" data-aos="fade-up">
                 <h3 class="text-xl font-bold text-white mb-8 flex items-center justify-center gap-3">
